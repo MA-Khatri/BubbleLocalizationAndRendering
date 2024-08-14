@@ -1,0 +1,12 @@
+# Estimated reflectances based off https://link.springer.com/article/10.1007/s11082-016-0876-4 (Fig 5a)
+# Nevermind, this is *heavily* oxidized, making ir very orange
+400 0.130
+450 0.075
+475 0.060
+500 0.075
+550 0.145
+600 0.295
+650 0.417
+700 0.508
+750 0.575
+800 0.610

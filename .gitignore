@@ -1,0 +1,9 @@
+chamber_model/full_assembly_obj/assembly.mtl
+chamber_model/full_assembly_obj/assembly.obj
+chamber_model/inner_vessel.PLY
+chamber_model/X-03-A03-A - Jar SiPM and reflector full assembly.PLY
+chamber_model/archive/inner_vessel.PLY
+chamber_model/archive/X-03-A03-A - Jar SiPM and reflector full assembly.PLY
+outputs/*
+!outputs/estimated_pose_matrices/
+!outputs/grid_pixel_locations/
