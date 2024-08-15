@@ -1084,8 +1084,8 @@ def compute_polynomial_distortion_coeffs(locations0: list, locations1: list) -> 
 
         A[i,   0] = 1
         A[i,   1] = x
-        A[i,   2] = x*x
-        A[i,   3] = x*x*x*x
+        A[i,   2] = x**2
+        A[i,   3] = x**4
         A[i,   4] = 0
         A[i,   5] = 0
         A[i,   6] = 0
@@ -1097,8 +1097,8 @@ def compute_polynomial_distortion_coeffs(locations0: list, locations1: list) -> 
         A[i+1, 3] = 0
         A[i+1, 4] = 1
         A[i+1, 5] = y
-        A[i+1, 6] = y*y
-        A[i+1, 7] = y*y*y*y
+        A[i+1, 6] = y**2
+        A[i+1, 7] = y**4
 
         i += 2
 
@@ -1129,8 +1129,8 @@ def polynomial_undistort(locs: np.ndarray, dist: np.ndarray) -> np.ndarray:
         if np.all(locs[i] != None):
             x = locs[i][0]
             y = locs[i][1]
-            x_ = dist[0] + dist[1]*x + dist[2]*x*x + dist[3]*x*x*x*x
-            y_ = dist[4] + dist[5]*y + dist[6]*y*y + dist[7]*y*y*y*y
+            x_ = dist[0] + dist[1]*x + dist[2]*(x**2) + dist[3]*(x**4)
+            y_ = dist[4] + dist[5]*y + dist[6]*(y**2) + dist[7]*(y**4)
             undistorted.append(np.array([x_, y_]))
         else:
             undistorted.append(np.array([[None], [None]]))
@@ -1162,31 +1162,31 @@ def compute_polynomial_extended_distortion_coeffs(locations0: list, locations1: 
         x = posn[0]
         y = posn[1]
 
-        A[i,   0] = 1
-        A[i,   1] = x
-        A[i,   2] = x*x
-        A[i,   3] = x*x*x*x
-        A[i,   4] = x*x*x*x*x*x
-        A[i,   5] = x*x*x*x*x*x*x*x
-        A[i,   6] = 0
-        A[i,   7] = 0
-        A[i,   8] = 0
-        A[i,   9] = 0
-        A[i,   10] = 0
-        A[i,   11] = 0
+        A[i,  0] = 1
+        A[i,  1] = x
+        A[i,  2] = x**2
+        A[i,  3] = x**4
+        A[i,  4] = x**6
+        A[i,  5] = x**8
+        A[i,  6] = 0
+        A[i,  7] = 0
+        A[i,  8] = 0
+        A[i,  9] = 0
+        A[i, 10] = 0
+        A[i, 11] = 0
 
-        A[i+1, 0] = 0
-        A[i+1, 1] = 0
-        A[i+1, 2] = 0
-        A[i+1, 3] = 0
-        A[i+1, 4] = 0
-        A[i+1, 5] = 0
-        A[i+1, 6] = 1
-        A[i+1, 7] = y
-        A[i+1, 8] = y*y
-        A[i+1, 9] = y*y*y*y
-        A[i+1, 10] = y*y*y*y*y*y
-        A[i+1, 11] = y*y*y*y*y*y*y*y
+        A[i+1,  0] = 0
+        A[i+1,  1] = 0
+        A[i+1,  2] = 0
+        A[i+1,  3] = 0
+        A[i+1,  4] = 0
+        A[i+1,  5] = 0
+        A[i+1,  6] = 1
+        A[i+1,  7] = y
+        A[i+1,  8] = y**2
+        A[i+1,  9] = y**4
+        A[i+1, 10] = y**6
+        A[i+1, 11] = y**8
 
         i += 2
 
@@ -1217,8 +1217,8 @@ def polynomial_extended_undistort(locs: np.ndarray, dist: np.ndarray) -> np.ndar
         if np.all(locs[i] != None):
             x = locs[i][0]
             y = locs[i][1]
-            x_ = dist[0] + dist[1]*x + dist[2]*x*x + dist[3]*x*x*x*x + dist[4]*x*x*x*x*x*x + dist[5]*x*x*x*x*x*x*x*x
-            y_ = dist[6] + dist[7]*y + dist[8]*y*y + dist[9]*y*y*y*y + dist[10]*y*y*y*y*y*y + dist[11]*y*y*y*y*y*y*y*y
+            x_ = dist[0] + dist[1]*x + dist[2]*(x**2) + dist[3]*(x**4) + dist[ 4]*(x**6) + dist[ 5]*(x**8)
+            y_ = dist[6] + dist[7]*y + dist[8]*(y**2) + dist[9]*(y**4) + dist[10]*(y**6) + dist[11]*(y**8)
             undistorted.append(np.array([x_, y_]))
         else:
             undistorted.append(np.array([[None], [None]]))
