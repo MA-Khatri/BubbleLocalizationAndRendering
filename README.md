@@ -4,6 +4,8 @@ This is the repository for the code associated with my thesis that can be found 
 
 The primary files are [setup.py](setup.py) which contains functions for setting up and rendering images of the chambers, and [utils.py](utils.py) which contains several functions that are used for triangulation, remapping, creating plots, etc. Examples of how the functions from those files are used to create renders and triangulate bubbles can be found within the Jupyter notebooks.
 
+The associated Blender files used to clean up and export the chamber model can be found [here](https://drive.google.com/drive/folders/1IG_XLitbM6101vEFMDmiwda3bSZK6OpN?usp=drive_link). If you wish to make edits to any of the chamber elements, you can do so in Blender and export the selected components to the `chamber_model/components/` folder. Make sure to make any corresponding necessary changes to the `setup.py` file!
+
 ## Setting Up the Environment
 The code in this repository was run in an Anaconda environment. If you do not already have a version of Anaconda installed, I recommend downloading a minimal version of it [here](https://docs.anaconda.com/miniconda/) (or download a version with a full GUI from [here](https://www.anaconda.com/download/success)).
 
