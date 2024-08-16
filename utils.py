@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 
 from setup import *
 
-mi.set_variant('cuda_ad_rgb')
-
 
 def load_image(path: str, grayscale=True) -> np.ndarray:
     """Load an image as a numpy array from a given filepath.
@@ -1348,7 +1346,58 @@ def switch_handedness(P: np.ndarray) -> np.ndarray:
     else:
         print("ERROR! Invalid shape.")
         return None
+
+
+###
+### Bulk Rendering
+###
+default_bubble_grid_config = {
+    # The bubble material properties
+    'bubble_material': {
+        'type': 'dielectric',
+        'int_ior': 1.0, # IoR of a vacuum
+        'ext_ior': 1.17, # IoR of LAr
+    },
     
+    # The radii of the 'bubbles' in cm
+    'bubble_scale': 0.5,
+
+    # Determine whether each render should be saved as a black and white image
+    'save_mono': True,
+
+    # Determine if the image renders should be denoised
+    'denoise': False,
+}
+
+def bubble_grid_renders(components: dict, sensor: dict, grid: list, 
+                        config: dict = default_bubble_grid_config) -> np.ndarray:
+    """Using the scene components (with or without the refractive elements),
+    generate a render of a bubble for each point in the grid and save the render.
+    
+    Parameters:
+        components: a dict representing the Mitsuba scene\\
+        sensor: a dict representing the Mitsuba sensor being used to render the scene\\
+        grid: the grid of 3D points for which pixel positions will be determined\\
+        config: a dict of extra params -- see 'default_bubble_grid_config' for more info
+        
+    Returns:
+        None. Instead, saves images to outputs/[date]/
+        where [date] corresponds to when each render was started
+    """
+    for point in grid: 
+        # Add the bubble to the scene
+        components.update({
+            'bubble': mi.load_dict({
+                'type': 'sphere',
+                'bsdf': config['bubble_material'],
+                'to_world': mi.ScalarTransform4f.translate(point).scale(config['bubble_scale']),
+            })
+        })
+
+        # render the scene
+        scene = load_scene(components=components, sensor=sensor)
+        render(scene, denoise=config['denoise'], save_mono=config['save_mono'])
+
 
 ###
 ### Misc

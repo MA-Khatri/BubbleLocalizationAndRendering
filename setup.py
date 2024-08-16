@@ -12,7 +12,8 @@ object_format = '.ply'
 output_dir = './outputs/'
 input_dir = './chamber_images/'
 
-mi.set_variant('cuda_ad_rgb')
+# Select the best-available Mitsuba variant
+mi.set_variant('cuda_ad_rgb', 'llvm_ad_rgb', 'scalar_rgb')
 
 def normalize(arr: np.ndarray) -> np.ndarray:
     """Normalizes a numpy array"""

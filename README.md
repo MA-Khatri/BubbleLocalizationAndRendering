@@ -9,43 +9,51 @@ The primary files are [setup.py](setup.py) which contains functions for setting 
 The associated Blender files used to clean up and export the chamber model can be found [here](https://drive.google.com/drive/folders/1IG_XLitbM6101vEFMDmiwda3bSZK6OpN?usp=drive_link). If you wish to make edits to any of the chamber elements, you can do so in Blender and export the selected components to the `chamber_model/components/` folder. Make sure to make any corresponding necessary changes to the `setup.py` file!
 
 ## Setting Up the Environment
-The code in this repository was run in an Anaconda environment. If you do not already have a version of Anaconda installed, I recommend downloading a minimal version of it [here](https://docs.anaconda.com/miniconda/) (or download a version with a full GUI from [here](https://www.anaconda.com/download/success)).
 
-The easiest way to get the code up and running would be to create a new conda environment using the provided `environment.yml` file by navigating to this repository's directory in the Anaconda Prompt and running the following:
+The code in this repository was run in an Anaconda environment on a windows machine with a CUDA-enabled NVIDIA GPU. If you do not already have a version of Anaconda installed, I recommend downloading a minimal version of it [here](https://docs.anaconda.com/miniconda/) (or download a version with a full GUI from [here](https://www.anaconda.com/download/success)). To set up a conda environment on a windows machine using the provided `environment.yml` file, see [Windows](#windows). If that does not work, or if you are using a non-windows OS, see [Manually Installing Packages](#manually-installing-packages).
 
-```
+### Windows
+
+To setup the conda environment using the `environment.yml` file, navigate to this repository's directory in an Anaconda Prompt and run the following:
+
+```console
 conda env create -f environment.yml
 ```
 
-which will create a new conda environment named `Bubble` and automatically install all required packages with the versions used to create this code. If you want to install the environemnt under a different name, you can instead run (substituting `<env_name>` with your desired name):
+This will create a new conda environment named `Bubble` and automatically install all required packages with the versions used to create this code.
 
+### Manually Installing Packages
+
+You can also install all the required packages using the provided `requirements.txt` file. If using a python virtual env, you should be able to install all required packages using just:
+
+```console
+pip install -r requirements.txt
 ```
-conda create --name <env_name> --file requirements.txt
+
+If using a conda environment, first create a new pip installation in the environment then install the required packages with pip:
+
+```console
+conda install pip
+pip install -r requirements.txt
 ```
 
-If you are using a code editor like VSCode, you should be able to open the Jupyter notebooks and run them using the newly created `Bubble` environment. 
+Note that we run `conda install pip` as it makes sure the packages are installed for the conda environment and not to the system-wide environment.
 
-If you instead want to run the code in the native Jupyter notebook environment, first activate the environment in an Anaconda Prompt:
+### Running Notebooks
 
-```
+If you are using a code editor like VSCode, you should be able to open the Jupyter notebooks and run them using the newly created `Bubble` environment. If instead you want to run the code in the native Jupyter notebook/lab environment, first activate the environment in an Anaconda Prompt:
+
+```console
 conda activate Bubble
 ```
 
 Then activate `Jupyter Lab` using the command
 
-```
+```console
 jupyter lab
 ```
 
 which should open a lab environment where you can edit and run the notebooks using your default browswer.
-
----
-Note that a `requirements.txt` file is also included in case you do not wish to use Anaconda (opting for something like Python's `virtualenv`) and should allow you to download all required packages using Python's package manager `pip`:
-
-```
-pip install -r requirements.txt
-```
----
 
 ## Notebooks
 
@@ -59,6 +67,7 @@ pip install -r requirements.txt
 - [`TriangulationWithPixelOffsetPnPPoses.ipynb`](TriangulationWithPixelOffsetPnPPoses.ipynb) Plots the relationship between the error in pixel localization of the fiducial markers vs the resulting error in the estimated pose and average triangulation error.
 - [`TriangulationWithPnPEstimatedPoseMatrix.ipynb`](TriangulationWithPnPEstimatedPoseMatrix.ipynb) Runs n-view triangulation on the test grid using the estimated poses calculated in `PoseMatrixEstimation.ipynb`.
 - [`CorrespondingBubbleDetectionTest.ipynb`](CorrespondingBubbleDetectionTest.ipynb) Features a test for a possible solution to determining corresponding bubble locations between images.
+- [`BulkRendering.ipynb](BulkRendering.ipynb) Shows how multiple renders of a grid of bubbles can be created using the `bubble_grid_renders` function.
 
 ---
 
@@ -70,3 +79,5 @@ Note: notebooks located in the archive folder are not well documented and featur
 - [`archive\LocationRemappingTest.ipynb`](archive\LocationRemappingTest.ipynb) Features some of the initial tests for determining the remapping coefficients of distortion functions.
 - [`archive\LocationMappingComparedWithAndWithoutDistortedSurface.ipynb`](archive\LocationMappingComparedWithAndWithoutDistortedSurface.ipynb) Similar to `archive\LocationRemappingTest.ipynb`, performs initial tests for pixel remapping, now comparing the results with and without the distorted jar surfaces.
 - [`archive\TwoCameraTriangulationError.ipynb`](archive\TwoCameraTriangulationError.ipynb) Initial triangulation tests for two-camera midpoint triangulation.
+- [`archive\PoseOptimizationWithRenders.ipynb`](archive\PoseOptimizationWithRenders.ipynb) Attempts to use Mitsuba's inverse rendering to optimize for the pose of the cameras. Based on [this Mitsuba tutorial](https://mitsuba.readthedocs.io/en/latest/src/inverse_rendering/object_pose_estimation.html).
+- [`archive\BasicChamberSurfaceOptimizationRender.ipynb`](archive\BasicChamberSurfaceOptimizationRender.ipynb) Attempts at optimizing a heightmap to determine jar surface distortion. Optimizations were attempted by comparing to a rendered image with a distorted jar surface. Based on [this Mitsuba tutorial](https://mitsuba.readthedocs.io/en/latest/src/inverse_rendering/caustics_optimization.html).
