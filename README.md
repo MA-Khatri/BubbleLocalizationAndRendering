@@ -1,6 +1,6 @@
 # Bubble Localization and Rendering for the SBC
 
-![](thesis\figures\localization_flow_chart_2.png)
+![Flow chart of steps in bubble localization for the SBC chambers.](thesis/figures/localization_flow_chart_2.png)
 
 This is the repository for the code associated with my thesis that can be found [here](thesis/Bubble_Localization_and_Rendering_for_the_SBC.pdf).
 
