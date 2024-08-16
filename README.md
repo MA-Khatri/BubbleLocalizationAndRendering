@@ -67,7 +67,7 @@ which should open a lab environment where you can edit and run the notebooks usi
 - [`TriangulationWithPixelOffsetPnPPoses.ipynb`](TriangulationWithPixelOffsetPnPPoses.ipynb) Plots the relationship between the error in pixel localization of the fiducial markers vs the resulting error in the estimated pose and average triangulation error.
 - [`TriangulationWithPnPEstimatedPoseMatrix.ipynb`](TriangulationWithPnPEstimatedPoseMatrix.ipynb) Runs n-view triangulation on the test grid using the estimated poses calculated in `PoseMatrixEstimation.ipynb`.
 - [`CorrespondingBubbleDetectionTest.ipynb`](CorrespondingBubbleDetectionTest.ipynb) Features a test for a possible solution to determining corresponding bubble locations between images.
-- [`BulkRendering.ipynb](BulkRendering.ipynb) Shows how multiple renders of a grid of bubbles can be created using the `bubble_grid_renders` function.
+- [`BulkRendering.ipynb`](BulkRendering.ipynb) Shows how multiple renders of a grid of bubbles can be created using the `bubble_grid_renders` function.
 
 ---
 
